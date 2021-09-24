@@ -13,9 +13,9 @@ import javax.swing.*;
 import java.lang.Thread;
 import java.util.Random;
 abstract class Component extends JFrame{
-	
+
 	Component(){
-		
+
 	}
 	public boolean transform_done=false;
 	public Vibrate vibrate;
@@ -26,19 +26,6 @@ abstract class Component extends JFrame{
 		return new Point(this.getLocation().x+(int)(this.getSize().width/2)-25,this.getLocation().y+(int)(this.getSize().height/2-25));
 	}
    public  void explosion() {
-//    	Thread th = new Thread(()-> {
-//    		JFrame jf =new JFrame();
-//    		jf.setVisible(true);
-//			JLabel jlb = new JLabel();	//实例化JLble
-//			int width = 50,height = 50;	//这是图片和JLable的宽度和高度
-//			jf.setSize(width,width);
-//			ImageIcon image = new ImageIcon("C:\\Users\\Joey\\Desktop\\explotion.gif");//实例化ImageIcon 对象
-//			image.setImage(image.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));//可以用下面三句代码来代替
-//			jlb.setIcon(image);
-//			jlb.setSize(width, height);
-//            this.getContentPane().add(jlb);
-//    	});
-		System.out.println("gogogogoe");
     	new Thread(()->{
     		Thread body_v ;
     		for(int i=0;i<2;i++) {
@@ -115,7 +102,7 @@ abstract class Component extends JFrame{
 		Thread body_t = new Thread(transform);
 		body_t.start();
 	}
-	
+
 }
 class Body_Transform_2 implements Runnable {
 	Body_Transform_2(){
@@ -177,7 +164,7 @@ class Square extends JFrame {
 	public JPanel jp = new JPanel();
 	Square(int t){
 		this.getInputContext().setCompositionEnabled(false);
-		type =t;	
+		type =t;
 		this.setUndecorated(true);
 		this.setVisible(true);
 		this.setFocusable(false);
@@ -311,7 +298,7 @@ abstract class Shape{
 				}
 				break;
 			}
-			
+
 		}
 		return can_r;
 	}
@@ -488,7 +475,7 @@ class T extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class J extends Shape{
@@ -555,7 +542,7 @@ class J extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class L extends Shape{
@@ -622,7 +609,7 @@ class L extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class Z extends Shape{
@@ -673,7 +660,7 @@ class Z extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class O extends Shape{
@@ -712,7 +699,7 @@ class O extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class Move implements Runnable{
@@ -728,7 +715,7 @@ class Move implements Runnable{
 	public void run() {
 		while(!game.game_end) {
 			while(go) {
-				boolean canmove=false;	
+				boolean canmove=false;
 				canmove=game.now_shape.move_location(game.map, x, y);
 				if(x==0&&y==1) {
 					if(canmove) {
@@ -740,7 +727,7 @@ class Move implements Runnable{
 			}
 			Transformer.delay(100);
 		}
-		
+
 	}
 }
 class S extends Shape{
@@ -791,7 +778,7 @@ class S extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class I extends Shape{
@@ -842,7 +829,7 @@ class I extends Shape{
 			}
 		}
 		return can_r;
-		
+
 	}
 }
 class Textsquare extends Square{
@@ -856,7 +843,7 @@ class Textsquare extends Square{
 		this.setLocation(x, y);
 		this.getContentPane().add(l);
 	}
-	
+
 
 }
 class Shoot implements Runnable{
@@ -1001,7 +988,7 @@ class Game implements Runnable{
 			while(ultimate.getSize().height!=ultimate_score*80) {
 				double delay=(ultimate_score*80-ultimate.getSize().height)/8;
 				if(delay<0)delay=50;
-				Transformer.delay((int)(350*(1/delay)));	
+				Transformer.delay((int)(350*(1/delay)));
 				ultimate.setSize(50,ultimate.getSize().height+8);
 				ultimate.getContentPane().setBackground(new Color(255,ultimate.getContentPane().getBackground().getGreen()-2,ultimate.getContentPane().getBackground().getBlue()-1));
 				ultimate.setLocation(1700,ultimate.getLocation().y-8);
@@ -1062,7 +1049,7 @@ class Game implements Runnable{
 		else if(add==2)n_score=3;
 		else if(add==1) n_score=1;
 		ultimate_score+=n_score;
-		
+
 	}
 	public void stop_shape() {
 		wait_stopdelay=true;
@@ -1224,12 +1211,12 @@ class Game implements Runnable{
 			}
 		}
 	}
-	public void update() {	
+	public void update() {
 		square_list.stream().forEach(s->{
 			s.setLocation(screen_X+s.x*50,screen_Y+s.y*50);
 		});
 	}
-	public void update_shape() {	
+	public void update_shape() {
 		bottom.setlocation(now_shape.getstop(map));
 		for(int i=0;i<4;i++) {
 			bottom.squares.get(i).setLocation(bottom.squares.get(i).x*50+screen_X,bottom.squares.get(i).y*50+screen_Y);
@@ -1333,7 +1320,7 @@ public  class Transformer extends JFrame {
 		for(int i=0;i<textw.length;i++) {
 			textw[i].setSize(50, 50);
 		}
-		
+
 	}
 	static void  Transform_Start() {
 		body = new Body();
@@ -1345,7 +1332,7 @@ public  class Transformer extends JFrame {
 		delay(1000);
 		left_arm = new Arm(body.getLocation().x,body.getLocation().y+175);
 		right_arm = new Arm(body.getLocation().x+body.getSize().width,body.getLocation().y+175);
-		right_arm.transform = new Transform(right_arm, new Point(152,76),new Point(2,0), 10, 10, 0,0); 
+		right_arm.transform = new Transform(right_arm, new Point(152,76),new Point(2,0), 10, 10, 0,0);
 		right_arm.transform();
 		left_arm.transform();
 		wait_transform(right_arm);
@@ -1372,7 +1359,7 @@ public  class Transformer extends JFrame {
 		right_foot= new Foot(right_leg.getLocation().x-25,right_leg.getLocation().y+right_leg.getSize().height);
 		right_foot.transform();
 		wait_transform(right_foot);
-		
+
 	}
 	public static Body body;
 	public static Head head;
@@ -1468,7 +1455,7 @@ public  class Transformer extends JFrame {
 			}
 			//System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
 		}
-	 
+
 		public  void keyReleased(KeyEvent e) {
 			//text.append("键盘" + KeyEvent.getKeyText(e.getKeyCode()) + "键松开\n");
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -1481,10 +1468,10 @@ public  class Transformer extends JFrame {
 				game.move_right.go=false;
 			}
 		}
-	 
+
 		public  void keyTyped(KeyEvent e) {
 			//text.append("输入的内容是" + e.getKeyChar() + "\n");
 		}
 	};
-	
+
 }
